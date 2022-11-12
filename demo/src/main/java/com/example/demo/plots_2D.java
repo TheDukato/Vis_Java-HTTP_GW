@@ -17,7 +17,7 @@ import java.util.List;
 public class plots_2D extends JPanel {
    /* private static Logger log = LogManager.getLogger("myLogger");*/
     //initialize coordinates
-    /*public List<Measurement> mes = new LinkedList<Measurement>();*/
+    public List<Measurement> mes = new LinkedList<Measurement>();
     public String title = new String();
     private int marg = 10;
 
