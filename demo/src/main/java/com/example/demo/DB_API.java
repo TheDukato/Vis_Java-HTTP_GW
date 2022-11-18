@@ -12,7 +12,7 @@ public class DB_API {
         try {
 
             Statement stat = conn.createStatement();
-            ResultSet result = stat.executeQuery("Select * from historian where timeOfProbe > " + date + " AND ID_Location = " + idLocation);
+            ResultSet result = stat.executeQuery("Select * from historian where timeOfProbe > " + date + " AND ID_Location = " + idLocation + " LIMIT 1000");
             while (result.next()) {
                 returnned.add(new Measurement(
                         result.getString(5),
@@ -26,12 +26,12 @@ public class DB_API {
         }
         return returnned;
     }
-    public static Measurement getLastDataFromDB (int idLocation,String date) {
+    public static Measurement getLastDataFromDB (int idLocation) {
         Connection conn = getRemoteConnection();
         Measurement returnned = new Measurement();
         try {
             Statement stat = conn.createStatement();
-            ResultSet result = stat.executeQuery("Select * from historian where timeOfProbe > " + date + " AND ID_Location = " + idLocation + " Limit 1");
+            ResultSet result = stat.executeQuery("Select * from historian where ID_Location = " + idLocation + " ORDER BY timeOfProbe desc LIMIT 1");
             result.next();
             return new Measurement(
                         result.getString(5),
